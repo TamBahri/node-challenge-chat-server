@@ -22,6 +22,13 @@ app.post("/messages", function (req, res) {
   console.log(req.body);
   const newMessage = req.body;
   messages.push(newMessage);
+  res.send(newMessage);
+});
+app.get("/messages/:messagesId", function (req, res) {
+  const { messagesId } = req.params;
+  const message = messages.find((message) => message.messagesId === messagesId);
+
+  res.json(message);
 });
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
